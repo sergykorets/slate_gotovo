@@ -24,7 +24,7 @@ meta:
 
 Welcome to the Gotovo API!
 
-# Authentication
+# Users
 
 > URL
 
@@ -86,6 +86,10 @@ phone | true | string
 password | true | string
 password_confirmation | false | string
 
+<aside class="notice">
+  Response includes `access-token`, `client`, `uid` in headers. So save them for further using of authorized access
+</aside>
+
 ## Login user
 
 > URL
@@ -142,6 +146,53 @@ Parameter | Required | Type
 --------- | ------- | -----------
 email | true | string
 password | true | string
+
+<aside class="notice">
+  Response includes `access-token`, `client`, `uid` in headers. So save them for further using of authorized access
+</aside>
+
+## Get user
+
+> URL
+
+```http
+https://gotovo-api-staging.fly.dev/api/profile
+```
+
+> Success response body
+
+```json
+{
+    "user": {
+        "email": "user@user.com",
+        "first_name": "Вася",
+        "last_name": "Готовий",
+        "phone": "380933456789",
+        "theme": "light",
+        "role": "default",
+        "delivery_point": {
+            "lat": null,
+            "lng": null
+        },
+        "location": {
+            "lat": null,
+            "lng": null
+        },
+        "delivery_address": null,
+        "working": false,
+        "guest": false,
+        "telegram_id": null,
+        "picture": false
+    }
+}
+```
+
+`GET https://gotovo-api-staging.fly.dev/api/profile`
+
+<aside class="warning">
+  Request should be authorized. So `access-token`, `client`, `uid` must be included in request headers.
+</aside>
+
 
 # Restaurants
 
@@ -494,156 +545,390 @@ Parameter | Required | Type
 --------- | ------- | -----------
 restaurant_id | true | integer
 
-# Kittens
+# Orders
 
-## Get All Kittens
+> URL
 
 ```http
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
+https://gotovo-api-staging.fly.dev/api/orderings
 ```
 
-> The above command returns JSON structured like this:
+> Success response body
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+    "success": true,
+    "order": {
+        "id": 1625,
+        "amount": "117.33",
+        "status": "payed",
+        "time": 1674304800000,
+        "kind": "to_go",
+        "restaurant_id": 33,
+        "invoice_url": null,
+        "when_ready": true,
+        "payment_type": "after_pay",
+        "persons": null,
+        "description": null,
+        "delivery_point": null,
+        "delivery_user_id": null,
+        "packing_price": "7.0",
+        "delivery_price": "0.0",
+        "delivery_address": null,
+        "phone": null,
+        "shared": null,
+        "share_token": null,
+        "separate_delivery_pay": false,
+        "created_at": "21.01.2023 14:20",
+        "updated_at": "21.01.2023 14:20",
+        "restaurant": {
+            "id": 33,
+            "name": "Yurov Pub",
+            "slug": "yurov-pub",
+            "description": "<p>Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі</p>",
+            "latitude": "50.619183",
+            "longitude": "27.158462",
+            "customer_phone": "380933523233",
+            "rating": "2.4",
+            "ratings_count": 5,
+            "do_packing?": true,
+            "instagram": "http://yurov.pub/ua/home",
+            "facebook": "http://yurov.pub/ua/home",
+            "website": "http://yurov.pub/ua/home",
+            "package_price": 7,
+            "main_photo_id": 37,
+            "payment_provider": "liqpay",
+            "terminal": true,
+            "qr_pay": true,
+            "allow_share_bill": true,
+            "delivery_compensation": 0,
+            "tips_url": null,
+            "separate_delivery_pay": true
+        },
+        "dishes": [
+            {
+                "id": 105,
+                "description": "",
+                "price": "40.33",
+                "available": true,
+                "weight": null,
+                "restaurant_id": 33,
+                "position": 0,
+                "packable": true,
+                "sub_category_id": null,
+                "delivery_price": "0.0",
+                "picture_url": null,
+                "category_dish_id": 39,
+                "package_capacity": 1,
+                "box_id": null,
+                "new_dish": false,
+                "name": "Лимонад",
+                "box": false,
+                "likes": 0,
+                "dislikes": 0,
+                "dish_variations": {},
+                "photo": null,
+                "quantity": 1,
+                "dish_variation": false
+            }
+        ],
+        "delivery_user": {},
+        "ordered_user": {
+            "name": "Гість",
+            "phone": "380933332211"
+        },
+        "table": false,
+        "versions": {},
+        "pay_shares": {}
+    },
+    "user": 
+        {
+            "email": "guest_7289d982-fbf0-4168-b6cf-df82f3494138@example.com",
+            "first_name": "Гість",
+            "last_name": "Хоче їсти",
+            "phone": "380633332211",
+            "theme": "light",
+            "role": "default",
+            "delivery_point": {
+                "lat": null,
+                "lng": null
+            },
+            "location": {
+                "lat": null,
+                "lng": null
+            },
+            "delivery_address": null,
+            "working": false,
+            "guest": true,
+            "telegram_id": null,
+            "picture": false
+        }
+}
 ```
 
-This endpoint retrieves all kittens.
+> Success response header (If first time order)
 
-### HTTP Request
+```json
+{
+      "access-token": "Uq9TmrhxylU90bLQcfrMAw",
+      "client": "7qlM_XwZIQihDuFvGIyTNA",
+      "last_name": "Готовий",
+      "expiry": 1675455256,
+      "uid": "user@user.com"
+}
+```
 
-`GET http://example.com/api/kittens`
+### Create order
 
-### Query Parameters
+`POST https://gotovo-api-staging.fly.dev/api/orderings`
 
-Parameter | Default | Description
+#### Query Parameters
+
+Parameter | Required | Type
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+restaurant_id | true | integer
+order_type | true | one of ['to_visit', 'to_go', 'delivery', 'on_table']
+payment_type | true | one of ['pre_pay', 'after_pay']
+orders | true | array [{id: 33 (dish_id), quantity: 2}, {...}]
+when_ready | false | boolean
+time | false | boolean (should be set if `when_ready = false`)
+shared | false | boolean (is order divided by users for `pre_pay` payment_type)
+delivery_point | false | array [latitude, longitude] (Required for `delivery` order_type)
+delivery_address | false | string (for `delivery` order_type)
+description | false | string (Special demands)
+persons | false | integer (Number of users for `to_visit` order_type)
+table_id | false | integer (Selected table for `to_visit` order_type)
+phone | false | string (Required if is first time order)
+first_name | false | string (User name)
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+  If first time order. User will be automaticaly created with `phone` number and returned in response body `{user: {...}}`.
+  Also in response header will be authorization `access-token`, `client`, `uid` which should be used along 
+  with resquest in header for next authorized orders 
 </aside>
 
-## Get a Specific Kitten
+## Get all user orders
 
-```ruby
-require 'kittn'
+> URL
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
+```http
+https://gotovo-api-staging.fly.dev/api/orderings
 ```
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> Success response body
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    "success": true,
+    "orders": [
+        {
+            "id": 1627,
+            "amount": "117.33",
+            "status": "payed",
+            "time": 1674305250000,
+            "kind": "to_go",
+            "restaurant_id": 33,
+            "invoice_url": null,
+            "when_ready": true,
+            "payment_type": "after_pay",
+            "persons": null,
+            "description": null,
+            "delivery_point": null,
+            "delivery_user_id": null,
+            "packing_price": "7.0",
+            "delivery_price": "0.0",
+            "delivery_address": null,
+            "phone": null,
+            "shared": null,
+            "share_token": null,
+            "separate_delivery_pay": false,
+            "created_at": "21.01.2023 14:27",
+            "updated_at": "21.01.2023 14:27",
+            "restaurant": {
+                "id": 33,
+                "name": "Yurov Pub",
+                "slug": "yurov-pub",
+                "description": "<p>Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі</p>",
+                "latitude": "50.619183",
+                "longitude": "27.158462",
+                "customer_phone": "380933523233",
+                "rating": "2.4",
+                "ratings_count": 5,
+                "do_packing?": true,
+                "instagram": "http://yurov.pub/ua/home",
+                "facebook": "http://yurov.pub/ua/home",
+                "website": "http://yurov.pub/ua/home",
+                "package_price": 7,
+                "main_photo_id": 37,
+                "payment_provider": "liqpay",
+                "terminal": true,
+                "qr_pay": true,
+                "allow_share_bill": true,
+                "delivery_compensation": 0,
+                "tips_url": null,
+                "separate_delivery_pay": true
+            },
+            "dishes": [
+                {
+                    "id": 105,
+                    "description": "",
+                    "price": "40.33",
+                    "available": true,
+                    "weight": null,
+                    "restaurant_id": 33,
+                    "position": 0,
+                    "packable": true,
+                    "sub_category_id": null,
+                    "delivery_price": "0.0",
+                    "picture_url": null,
+                    "category_dish_id": 39,
+                    "package_capacity": 1,
+                    "box_id": null,
+                    "new_dish": false,
+                    "name": "Лимонад",
+                    "box": false,
+                    "likes": 0,
+                    "dislikes": 0,
+                    "dish_variations": {},
+                    "photo": null,
+                    "quantity": 1,
+                    "dish_variation": false
+                }
+            ],
+            "delivery_user": {},
+            "ordered_user": {
+                "name": "Гість",
+                "phone": "380633332211"
+            },
+            "table": false,
+            "versions": {},
+            "pay_shares": {}
+        }
+    ],
+    "total_pages": 1
 }
 ```
 
-This endpoint retrieves a specific kitten.
+`GET https://gotovo-api-staging.fly.dev/api/orderings`
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+#### Query Parameters
 
-### HTTP Request
+Parameter | Required | Type
+--------- | ------- | -----------
+page | false | integer (Page number)
 
-`GET http://example.com/kittens/<ID>`
+<aside class="warning">
+  Request should be authorized. So `access-token`, `client`, `uid` must be included in request headers.
+</aside>
 
-### URL Parameters
+## Get user order
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+> URL
 
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
+```http
+https://gotovo-api-staging.fly.dev/api/orderings/:id
 ```
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
+> Success response body
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+    "success": true,
+    "order": {
+        "id": 1627,
+        "amount": "117.33",
+        "status": "payed",
+        "time": 1674305250000,
+        "kind": "to_go",
+        "restaurant_id": 33,
+        "invoice_url": null,
+        "when_ready": true,
+        "payment_type": "after_pay",
+        "persons": null,
+        "description": null,
+        "delivery_point": null,
+        "delivery_user_id": null,
+        "packing_price": "7.0",
+        "delivery_price": "0.0",
+        "delivery_address": null,
+        "phone": null,
+        "shared": null,
+        "share_token": null,
+        "separate_delivery_pay": false,
+        "created_at": "21.01.2023 14:27",
+        "updated_at": "21.01.2023 14:27",
+        "restaurant": {
+            "id": 33,
+            "name": "Yurov Pub",
+            "slug": "yurov-pub",
+            "description": "<p>Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі</p>",
+            "latitude": "50.619183",
+            "longitude": "27.158462",
+            "customer_phone": "380933523233",
+            "rating": "2.4",
+            "ratings_count": 5,
+            "do_packing?": true,
+            "instagram": "http://yurov.pub/ua/home",
+            "facebook": "http://yurov.pub/ua/home",
+            "website": "http://yurov.pub/ua/home",
+            "package_price": 7,
+            "main_photo_id": 37,
+            "payment_provider": "liqpay",
+            "terminal": true,
+            "qr_pay": true,
+            "allow_share_bill": true,
+            "delivery_compensation": 0,
+            "tips_url": null,
+            "separate_delivery_pay": true
+        },
+        "dishes": [
+            {
+                "id": 105,
+                "description": "",
+                "price": "40.33",
+                "available": true,
+                "weight": null,
+                "restaurant_id": 33,
+                "position": 0,
+                "packable": true,
+                "sub_category_id": null,
+                "delivery_price": "0.0",
+                "picture_url": null,
+                "category_dish_id": 39,
+                "package_capacity": 1,
+                "box_id": null,
+                "new_dish": false,
+                "name": "Лимонад",
+                "box": false,
+                "likes": 0,
+                "dislikes": 0,
+                "dish_variations": {},
+                "photo": null,
+                "quantity": 1,
+                "dish_variation": false
+            }
+        ],
+        "delivery_user": {},
+        "ordered_user": {
+            "name": "Гість",
+            "phone": "380633332211"
+        },
+        "table": false,
+        "versions": {},
+        "pay_shares": {}
+    }
 }
 ```
 
-This endpoint deletes a specific kitten.
+`GET https://gotovo-api-staging.fly.dev/api/orderings/:id`
 
-### HTTP Request
+#### Query Parameters
 
-`DELETE http://example.com/kittens/<ID>`
+Parameter | Required | Type
+--------- | ------- | -----------
+share_token | false | string (Required for `shared` order)
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+<aside class="warning">
+  Request should be authorized. So `access-token`, `client`, `uid` must be included in request headers.
+</aside>
 
