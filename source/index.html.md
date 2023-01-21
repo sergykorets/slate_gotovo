@@ -2,10 +2,7 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+  - http
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -25,80 +22,487 @@ meta:
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Welcome to the Gotovo API!
 
 # Authentication
 
-> To authorize, use this code:
+> URL
 
-```ruby
-require 'kittn'
+```http
+https://gotovo-api-staging.fly.dev/api/auth
+```
+> Success response body
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+```json
+{
+    "user": {
+        "email": "user@user.com",
+        "first_name": "Вася",
+        "last_name": "Готовий",
+        "phone": "380933456789",
+        "theme": "light",
+        "role": "default",
+        "delivery_point": {
+            "lat": null,
+            "lng": null
+        },
+        "location": {
+            "lat": null,
+            "lng": null
+        },
+        "delivery_address": null,
+        "working": false,
+        "guest": false,
+        "telegram_id": null,
+        "picture": false
+    }
+}
 ```
 
-```python
-import kittn
+> Success response header
 
-api = kittn.authorize('meowmeowmeow')
+```json
+{
+      "access-token": "Uq9TmrhxylU90bLQcfrMAw",
+      "client": "7qlM_XwZIQihDuFvGIyTNA",
+      "last_name": "Готовий",
+      "expiry": 1675455256,
+      "uid": "user@user.com"
+}
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+### Register user
+
+`POST https://gotovo-api-staging.fly.dev/api/auth`
+
+#### Query Parameters
+
+Parameter | Required | Type
+--------- | ------- | -----------
+email | true | string
+first_name | true | string
+last_name | true | string
+phone | true | string
+password | true | string
+password_confirmation | false | string
+
+## Login user
+
+> URL
+
+```http
+https://gotovo-api-staging.fly.dev/api/auth/sign_in
 ```
 
-```javascript
-const kittn = require('kittn');
+> Success response body
 
-let api = kittn.authorize('meowmeowmeow');
+```json
+{
+    "user": {
+        "email": "user@user.com",
+        "first_name": "Вася",
+        "last_name": "Готовий",
+        "phone": "380933456789",
+        "theme": "light",
+        "role": "default",
+        "delivery_point": {
+            "lat": null,
+            "lng": null
+        },
+        "location": {
+            "lat": null,
+            "lng": null
+        },
+        "delivery_address": null,
+        "working": false,
+        "guest": false,
+        "telegram_id": null,
+        "picture": false
+    }
+}
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Success response header
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+```json
+{
+      "access-token": "Uq9TmrhxylU90bLQcfrMAw",
+      "client": "7qlM_XwZIQihDuFvGIyTNA",
+      "last_name": "Готовий",
+      "expiry": 1675455256,
+      "uid": "user@user.com"
+}
+```
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+`POST https://gotovo-api-staging.fly.dev/api/auth/sign_in`
 
-`Authorization: meowmeowmeow`
+### Query Parameters
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+Parameter | Required | Type
+--------- | ------- | -----------
+email | true | string
+password | true | string
+
+# Restaurants
+
+> URL
+
+```http
+https://gotovo-api-staging.fly.dev/api/area_restaurants
+```
+
+> Success response body
+
+```json
+{
+    "success": true,
+    "restaurants": {
+        "yurov-pub": {
+            "id": 33,
+            "name": "Yurov Pub",
+            "slug": "yurov-pub",
+            "description": "<p>Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі</p>",
+            "latitude": "50.619183",
+            "longitude": "27.158462",
+            "customer_phone": "380933523233",
+            "rating": "2.4",
+            "ratings_count": 5,
+            "do_packing?": true,
+            "instagram": "http://instagram.com/yurov.pub",
+            "facebook": "http://facebook/yurov.pub",
+            "website": "http://yurov.pub/ua/home",
+            "package_price": 7,
+            "main_photo_id": 37,
+            "payment_provider": "liqpay",
+            "terminal": true,
+            "qr_pay": true,
+            "allow_share_bill": true,
+            "delivery_compensation": 0,
+            "tips_url": null,
+            "separate_delivery_pay": true,
+            "photos": [
+                {
+                    "id": 37,
+                    "description": null,
+                    "photo": "https://res.cloudinary.com/dpukpixsc/image/upload/c_scale,w_400/q_80/gyxg31g91modls53bmorpd2lzunm"
+                }
+            ],
+            "dishes_count": 25,
+            "packable_dishes_count": 17
+        }
+    }
+}
+```
+### Get local restaurants in radius
+
+`GET https://gotovo-api-staging.fly.dev/api/area_restaurants`
+
+#### Query Parameters
+
+Parameter | Required | Type
+--------- | ------- | -----------
+location | false | array [latitude, longitude]
+radius | false | integer (Default 10Km)
+
+## Get restaurant
+
+> URL
+
+```http
+https://gotovo-api-staging.fly.dev/api/restaurants/:slug
+```
+
+> Success response body
+
+```json
+{
+    "success": true,
+    "restaurant": {
+        "id": 33,
+        "name": "Yurov Pub",
+        "slug": "yurov-pub",
+        "description": "<p>Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі</p>",
+        "latitude": "50.619183",
+        "longitude": "27.158462",
+        "customer_phone": "380933523233",
+        "rating": "2.4",
+        "ratings_count": 5,
+        "do_packing?": true,
+        "instagram": "http://instagram.com/yurov.pub",
+        "facebook": "http://facebook/yurov.pub",
+        "website": "http://yurov.pub/ua/home",
+        "package_price": 7,
+        "main_photo_id": 37,
+        "payment_provider": "liqpay",
+        "terminal": true,
+        "qr_pay": true,
+        "allow_share_bill": true,
+        "delivery_compensation": 0,
+        "tips_url": null,
+        "separate_delivery_pay": true,
+        "photos": [
+            {
+                "id": 37,
+                "description": null,
+                "photo": "https://res.cloudinary.com/dpukpixsc/image/upload/c_scale,w_400/q_80/gyxg31g91modls53bmorpd2lzunm"
+            }
+        ],
+        "dishes_count": 25,
+        "packable_dishes_count": 17
+    }
+}
+```
+
+`GET https://gotovo-api-staging.fly.dev/api/restaurants/:slug`
+
+#### Query Parameters
+
+Parameter | Required | Type
+--------- | ------- | -----------
+menu | false | boolean (Get with menu categories included)
+table_id | false | integer (Get with table included)
+
+# Dishes
+
+> URL
+
+```http
+https://gotovo-api-staging.fly.dev/api/dishes
+```
+
+> Success response body
+
+```json
+{
+    "success": true,
+    "dishes": {
+        " 98": {
+            "id": 98,
+            "working_hours": {
+                "default": true,
+                "working_hours": {
+                    "Fri": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Mon": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Sat": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Sun": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Thu": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Tue": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Wed": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    }
+                }
+            },
+            "category_id": 1,
+            "has_package": false,
+            "content": "Перші страви",
+            "available": true,
+            "position": 0,
+            "sub_categories": [
+                {
+                    "id": 127,
+                    "name": "1",
+                    "position": null
+                },
+                {
+                    "id": 133,
+                    "name": "2",
+                    "position": null
+                }
+            ],
+            "packable_dishes_count": 2
+        }
+    }
+}
+```
+### Get restaurant dishes categories
+
+`GET https://gotovo-api-staging.fly.dev/api/dishes`
+
+#### Query Parameters
+
+Parameter | Required | Type
+--------- | ------- | -----------
+restaurant_id | true | integer
+
+## Get category dishes
+
+> URL
+
+```http
+https://gotovo-api-staging.fly.dev/api/dishes/category_dishes
+```
+
+> Success response body
+
+```json
+{
+    "success": true,
+    "dishes": [
+        {
+            "id": 633,
+            "description": "Опаньки",
+            "price": "1.0",
+            "available": true,
+            "weight": "",
+            "restaurant_id": 33,
+            "position": 0,
+            "packable": true,
+            "sub_category_id": 127,
+            "delivery_price": "0.0",
+            "picture_url": null,
+            "category_dish_id": 98,
+            "package_capacity": 1,
+            "box_id": null,
+            "new_dish": false,
+            "name": "Териякі",
+            "box": false,
+            "likes": 0,
+            "dislikes": 0,
+            "dish_variations": {}
+        }
+    ]
+}
+```
+
+`GET https://gotovo-api-staging.fly.dev/api/dishes/category_dishes`
+
+#### Query Parameters
+
+Parameter | Required | Type
+--------- | ------- | -----------
+category_id | true | integer (id field from previous request)
+
+## Get all dishes
+
+> URL
+
+```http
+https://gotovo-api-staging.fly.dev/api/dishes/all
+```
+
+> Success response body
+
+```json
+{
+    "success": true,
+    "dishes": {
+        " 98": {
+            "id": 98,
+            "working_hours": {
+                "default": true,
+                "working_hours": {
+                    "Fri": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Mon": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Sat": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Sun": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Thu": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Tue": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    },
+                    "Wed": {
+                        "end_time": "2000-01-01 22:00",
+                        "start_time": "2000-01-01 09:00"
+                    }
+                }
+            },
+            "has_package": false,
+            "category_id": 1,
+            "content": "Перші страви",
+            "available": true,
+            "position": 0,
+            "sub_categories": [
+                {
+                    "id": 127,
+                    "name": "1",
+                    "position": null
+                },
+                {
+                    "id": 133,
+                    "name": "2",
+                    "position": null
+                }
+            ],
+            "subItems": [
+                {
+                    "id": 636,
+                    "description": "З мощним хлібом та петрушкою, об'їститися можна. Лупашить не по дєтскі",
+                    "price": "99.0",
+                    "available": true,
+                    "weight": "",
+                    "restaurant_id": 33,
+                    "position": 0,
+                    "packable": false,
+                    "sub_category_id": 127,
+                    "delivery_price": "0.0",
+                    "picture_url": null,
+                    "category_dish_id": 98,
+                    "package_capacity": 1,
+                    "box_id": null,
+                    "new_dish": false,
+                    "name": "Солянка",
+                    "box": false,
+                    "likes": 0,
+                    "dislikes": 0,
+                    "dish_variations": {}
+                }
+            ]
+        }
+    }
+}
+```
+
+`GET https://gotovo-api-staging.fly.dev/api/dishes/all`
+
+#### Query Parameters
+
+Parameter | Required | Type
+--------- | ------- | -----------
+restaurant_id | true | integer
 
 # Kittens
 
 ## Get All Kittens
 
-```ruby
+```http
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
 api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
 ```
 
 > The above command returns JSON structured like this:
