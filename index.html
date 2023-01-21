@@ -316,13 +316,16 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#users" class="toc-h1 toc-link" data-title="Users">Users</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#register-user" class="toc-h2 toc-link" data-title="Register user">Register user</a>
                   </li>
                   <li>
                     <a href="#login-user" class="toc-h2 toc-link" data-title="Login user">Login user</a>
+                  </li>
+                  <li>
+                    <a href="#get-user" class="toc-h2 toc-link" data-title="Get user">Get user</a>
                   </li>
               </ul>
           </li>
@@ -352,16 +355,16 @@
               </ul>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#orders" class="toc-h1 toc-link" data-title="Orders">Orders</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#create-order" class="toc-h2 toc-link" data-title="Create order">Create order</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#get-all-user-orders" class="toc-h2 toc-link" data-title="Get all user orders">Get all user orders</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#get-user-order" class="toc-h2 toc-link" data-title="Get user order">Get user order</a>
                   </li>
               </ul>
           </li>
@@ -379,7 +382,7 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the Gotovo API!</p>
-<h1 id='authentication'>Authentication</h1>
+<h1 id='users'>Users</h1>
 <blockquote>
 <p>URL</p>
 </blockquote>
@@ -463,6 +466,10 @@
 <td>string</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+  Response includes `access-token`, `client`, `uid` in headers. So save them for further using of authorized access
+</aside>
 <h2 id='login-user'>Login user</h2>
 <blockquote>
 <p>URL</p>
@@ -527,6 +534,48 @@
 <td>string</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+  Response includes `access-token`, `client`, `uid` in headers. So save them for further using of authorized access
+</aside>
+<h2 id='get-user'>Get user</h2>
+<blockquote>
+<p>URL</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="err">https://gotovo-api-staging.fly.dev/api/profile
+</span></code></pre></div>
+<blockquote>
+<p>Success response body</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@user.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Вася"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Готовий"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380933456789"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"light"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_point"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"lng"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"lng"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"delivery_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"working"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"guest"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"telegram_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>GET https://gotovo-api-staging.fly.dev/api/profile</code></p>
+
+<aside class="warning">
+  Request should be authorized. So `access-token`, `client`, `uid` must be included in request headers.
+</aside>
 <h1 id='restaurants'>Restaurants</h1>
 <blockquote>
 <p>URL</p>
@@ -904,139 +953,454 @@
 <td>integer</td>
 </tr>
 </tbody></table>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><div class="highlight"><pre class="highlight http tab-http"><code><span class="err">require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
+<h1 id='orders'>Orders</h1>
+<blockquote>
+<p>URL</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="err">https://gotovo-api-staging.fly.dev/api/orderings
 </span></code></pre></div>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Success response body</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1625</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"117.33"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payed"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1674304800000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"to_go"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"invoice_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"when_ready"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"after_pay"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"persons"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"packing_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"share_token"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"separate_delivery_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21.01.2023 14:20"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21.01.2023 14:20"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"restaurant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yurov Pub"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yurov-pub"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.619183"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27.158462"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"customer_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380933523233"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.4"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"ratings_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"do_packing?"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"instagram"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"facebook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"package_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"main_photo_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"payment_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"liqpay"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"terminal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"qr_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"allow_share_bill"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"delivery_compensation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tips_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"separate_delivery_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"dishes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">105</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.33"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"packable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"sub_category_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"delivery_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"picture_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"category_dish_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"package_capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"box_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"new_dish"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Лимонад"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"box"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dislikes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dish_variations"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                </span><span class="nl">"photo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dish_variation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"delivery_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"ordered_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Гість"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380933332211"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"versions"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"pay_shares"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"guest_7289d982-fbf0-4168-b6cf-df82f3494138@example.com"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Гість"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Хоче їсти"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380633332211"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"theme"</span><span class="p">:</span><span class="w"> </span><span class="s2">"light"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"delivery_point"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"lng"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"lat"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"lng"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"delivery_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"working"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"guest"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"telegram_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters-8'>Query Parameters</h3>
+<blockquote>
+<p>Success response header (If first time order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+      </span><span class="nl">"access-token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uq9TmrhxylU90bLQcfrMAw"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"client"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7qlM_XwZIQihDuFvGIyTNA"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Готовий"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="mi">1675455256</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user@user.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='create-order'>Create order</h3>
+<p><code>POST https://gotovo-api-staging.fly.dev/api/orderings</code></p>
+<h4 id='query-parameters-8'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
+<th>Required</th>
+<th>Type</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
+<td>restaurant_id</td>
 <td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>integer</td>
+</tr>
+<tr>
+<td>order_type</td>
+<td>true</td>
+<td>one of [&#39;to_visit&#39;, &#39;to_go&#39;, &#39;delivery&#39;, &#39;on_table&#39;]</td>
+</tr>
+<tr>
+<td>payment_type</td>
+<td>true</td>
+<td>one of [&#39;pre_pay&#39;, &#39;after_pay&#39;]</td>
+</tr>
+<tr>
+<td>orders</td>
+<td>true</td>
+<td>array [{id: 33 (dish_id), quantity: 2}, {...}]</td>
+</tr>
+<tr>
+<td>when_ready</td>
+<td>false</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>time</td>
+<td>false</td>
+<td>boolean (should be set if <code>when_ready = false</code>)</td>
+</tr>
+<tr>
+<td>shared</td>
+<td>false</td>
+<td>boolean (is order divided by users for <code>pre_pay</code> payment_type)</td>
+</tr>
+<tr>
+<td>delivery_point</td>
+<td>false</td>
+<td>array <a href="Required%20for%20`delivery`%20order_type">latitude, longitude</a></td>
+</tr>
+<tr>
+<td>delivery_address</td>
+<td>false</td>
+<td>string (for <code>delivery</code> order_type)</td>
+</tr>
+<tr>
+<td>description</td>
+<td>false</td>
+<td>string (Special demands)</td>
+</tr>
+<tr>
+<td>persons</td>
+<td>false</td>
+<td>integer (Number of users for <code>to_visit</code> order_type)</td>
+</tr>
+<tr>
+<td>table_id</td>
+<td>false</td>
+<td>integer (Selected table for <code>to_visit</code> order_type)</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>false</td>
+<td>string (Required if is first time order)</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td>false</td>
+<td>string (User name)</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+  If first time order. User will be automaticaly created with `phone` number and returned in response body `{user: {...}}`.
+  Also in response header will be authorization `access-token`, `client`, `uid` which should be used along 
+  with resquest in header for next authorized orders 
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
+<h2 id='get-all-user-orders'>Get all user orders</h2>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>URL</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="err">https://gotovo-api-staging.fly.dev/api/orderings
+</span></code></pre></div>
+<blockquote>
+<p>Success response body</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1627</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"117.33"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payed"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1674305250000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"to_go"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"invoice_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"when_ready"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"after_pay"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"persons"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"delivery_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"delivery_user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"packing_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"delivery_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"delivery_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"share_token"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"separate_delivery_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21.01.2023 14:27"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21.01.2023 14:27"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"restaurant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yurov Pub"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yurov-pub"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.619183"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27.158462"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"customer_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380933523233"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.4"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"ratings_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"do_packing?"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"instagram"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"facebook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"package_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"main_photo_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"payment_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"liqpay"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"terminal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"qr_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"allow_share_bill"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"delivery_compensation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"tips_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"separate_delivery_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"dishes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">105</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.33"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"packable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"sub_category_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"delivery_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"picture_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"category_dish_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"package_capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"box_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"new_dish"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Лимонад"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"box"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"dislikes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"dish_variations"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                    </span><span class="nl">"photo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"dish_variation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"delivery_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="nl">"ordered_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Гість"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380633332211"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"versions"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="nl">"pay_shares"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<p><code>GET https://gotovo-api-staging.fly.dev/api/orderings</code></p>
+<h4 id='query-parameters-9'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Description</th>
+<th>Required</th>
+<th>Type</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>page</td>
+<td>false</td>
+<td>integer (Page number)</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="n">kittens</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span> <span class="se">\</span>
-  <span class="nt">-X</span> DELETE <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">kittn</span><span class="dl">'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="dl">'</span><span class="s1">meowmeowmeow</span><span class="dl">'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
+<aside class="warning">
+  Request should be authorized. So `access-token`, `client`, `uid` must be included in request headers.
+</aside>
+<h2 id='get-user-order'>Get user order</h2>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>URL</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="err">https://gotovo-api-staging.fly.dev/api/orderings/:id
+</span></code></pre></div>
+<blockquote>
+<p>Success response body</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1627</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"117.33"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"payed"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1674305250000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"to_go"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"invoice_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"when_ready"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"after_pay"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"persons"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_point"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"packing_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"delivery_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"shared"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"share_token"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"separate_delivery_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21.01.2023 14:27"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21.01.2023 14:27"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"restaurant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yurov Pub"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yurov-pub"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;Ми Yurov-Pub! Ми постійно розвиваємося, надихаємо та дивуємо! В нас затишна атмосфера, різноманітній бар, чудова кухня та завжди привітний персонал! Запрошуємо гарно провести час разом з нами! Також не забувайте про відгуки, адже ваша думка дуже важлива для нас! #korets_yurov_pubі&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"50.619183"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"27.158462"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"customer_phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380933523233"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.4"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"ratings_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"do_packing?"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"instagram"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"facebook"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://yurov.pub/ua/home"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"package_price"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"main_photo_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"payment_provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"liqpay"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"terminal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"qr_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"allow_share_bill"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"delivery_compensation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"tips_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"separate_delivery_pay"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"dishes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">105</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.33"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"weight"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"restaurant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"packable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"sub_category_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"delivery_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"picture_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"category_dish_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"package_capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"box_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"new_dish"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Лимонад"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"box"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dislikes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dish_variations"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                </span><span class="nl">"photo"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"dish_variation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"delivery_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"ordered_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Гість"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"380633332211"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"versions"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"pay_shares"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<p><code>GET https://gotovo-api-staging.fly.dev/api/orderings/:id</code></p>
+<h4 id='query-parameters-10'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Description</th>
+<th>Required</th>
+<th>Type</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>share_token</td>
+<td>false</td>
+<td>string (Required for <code>shared</code> order)</td>
 </tr>
 </tbody></table>
+
+<aside class="warning">
+  Request should be authorized. So `access-token`, `client`, `uid` must be included in request headers.
+</aside>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
